@@ -82,7 +82,7 @@ Partial Class frmMain
         Label1.AutoSize = True
         Label1.Location = New Point(6, 21)
         Label1.Name = "Label1"
-        Label1.Size = New Size(53, 25)
+        Label1.Size = New Size(35, 15)
         Label1.TabIndex = 0
         Label1.Text = "Paste"
         ' 
@@ -107,7 +107,7 @@ Partial Class frmMain
         lnkOutputFinal.AutoSize = True
         lnkOutputFinal.Location = New Point(614, 24)
         lnkOutputFinal.Name = "lnkOutputFinal"
-        lnkOutputFinal.Size = New Size(54, 25)
+        lnkOutputFinal.Size = New Size(35, 15)
         lnkOutputFinal.TabIndex = 7
         lnkOutputFinal.TabStop = True
         lnkOutputFinal.Text = "Copy"
@@ -117,7 +117,7 @@ Partial Class frmMain
         lnkInputExpanded.AutoSize = True
         lnkInputExpanded.Location = New Point(67, 24)
         lnkInputExpanded.Name = "lnkInputExpanded"
-        lnkInputExpanded.Size = New Size(129, 25)
+        lnkInputExpanded.Size = New Size(86, 15)
         lnkInputExpanded.TabIndex = 6
         lnkInputExpanded.TabStop = True
         lnkInputExpanded.Text = "Histo with Axis"
@@ -127,7 +127,7 @@ Partial Class frmMain
         Label7.AutoSize = True
         Label7.Location = New Point(6, 49)
         Label7.Name = "Label7"
-        Label7.Size = New Size(334, 25)
+        Label7.Size = New Size(225, 15)
         Label7.TabIndex = 10
         Label7.Text = "(from Scanner, will remove Dummy cells)"
         ' 
@@ -136,7 +136,7 @@ Partial Class frmMain
         Label6.AutoSize = True
         Label6.Location = New Point(538, 47)
         Label6.Name = "Label6"
-        Label6.Size = New Size(409, 25)
+        Label6.Size = New Size(272, 15)
         Label6.TabIndex = 9
         Label6.Text = "(use as Paste Special > Multiply by % in the Editor)"
         ' 
@@ -145,7 +145,7 @@ Partial Class frmMain
         Label4.AutoSize = True
         Label4.Location = New Point(538, 24)
         Label4.Name = "Label4"
-        Label4.Size = New Size(69, 25)
+        Label4.Size = New Size(45, 15)
         Label4.TabIndex = 8
         Label4.Text = "Output"
         ' 
@@ -154,7 +154,7 @@ Partial Class frmMain
         Label3.AutoSize = True
         Label3.Location = New Point(6, 24)
         Label3.Name = "Label3"
-        Label3.Size = New Size(53, 25)
+        Label3.Size = New Size(35, 15)
         Label3.TabIndex = 2
         Label3.Text = "Paste"
         ' 
@@ -164,7 +164,7 @@ Partial Class frmMain
         grdFinal.AllowUserToDeleteRows = False
         DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = SystemColors.ActiveCaption
-        DataGridViewCellStyle1.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        DataGridViewCellStyle1.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
         DataGridViewCellStyle1.ForeColor = SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
@@ -232,7 +232,7 @@ Partial Class frmMain
         cmbHPTVersion.FormattingEnabled = True
         cmbHPTVersion.Location = New Point(3, 99)
         cmbHPTVersion.Name = "cmbHPTVersion"
-        cmbHPTVersion.Size = New Size(337, 33)
+        cmbHPTVersion.Size = New Size(337, 23)
         cmbHPTVersion.TabIndex = 15
         ' 
         ' lnkCopyDummyColumnHeaders
@@ -240,7 +240,7 @@ Partial Class frmMain
         lnkCopyDummyColumnHeaders.AutoSize = True
         lnkCopyDummyColumnHeaders.Location = New Point(614, 28)
         lnkCopyDummyColumnHeaders.Name = "lnkCopyDummyColumnHeaders"
-        lnkCopyDummyColumnHeaders.Size = New Size(144, 25)
+        lnkCopyDummyColumnHeaders.Size = New Size(96, 15)
         lnkCopyDummyColumnHeaders.TabIndex = 6
         lnkCopyDummyColumnHeaders.TabStop = True
         lnkCopyDummyColumnHeaders.Text = "Column Headers"
@@ -249,7 +249,7 @@ Partial Class frmMain
         ' 
         spinHzRange.Location = New Point(184, 64)
         spinHzRange.Name = "spinHzRange"
-        spinHzRange.Size = New Size(58, 31)
+        spinHzRange.Size = New Size(58, 23)
         spinHzRange.TabIndex = 9
         spinHzRange.Value = New [Decimal](New Integer() {50, 0, 0, 0})
         ' 
@@ -258,7 +258,7 @@ Partial Class frmMain
         spinDummyColumns.Enabled = False
         spinDummyColumns.Location = New Point(184, 27)
         spinDummyColumns.Name = "spinDummyColumns"
-        spinDummyColumns.Size = New Size(58, 31)
+        spinDummyColumns.Size = New Size(58, 23)
         spinDummyColumns.TabIndex = 2
         spinDummyColumns.Value = New [Decimal](New Integer() {2, 0, 0, 0})
         ' 
@@ -268,7 +268,7 @@ Partial Class frmMain
         radHzRange.Checked = True
         radHzRange.Location = New Point(3, 64)
         radHzRange.Name = "radHzRange"
-        radHzRange.Size = New Size(144, 29)
+        radHzRange.Size = New Size(96, 19)
         radHzRange.TabIndex = 8
         radHzRange.TabStop = True
         radHzRange.Text = "Hz Range +/-"
@@ -279,7 +279,7 @@ Partial Class frmMain
         radColumns.AutoSize = True
         radColumns.Location = New Point(3, 26)
         radColumns.Name = "radColumns"
-        radColumns.Size = New Size(178, 29)
+        radColumns.Size = New Size(119, 19)
         radColumns.TabIndex = 7
         radColumns.Text = "Columns to Insert"
         radColumns.UseVisualStyleBackColor = True
@@ -291,7 +291,7 @@ Partial Class frmMain
         lblSoftWarn.ForeColor = Color.Red
         lblSoftWarn.Location = New Point(536, 99)
         lblSoftWarn.Name = "lblSoftWarn"
-        lblSoftWarn.Size = New Size(376, 28)
+        lblSoftWarn.Size = New Size(265, 19)
         lblSoftWarn.TabIndex = 14
         lblSoftWarn.Text = "Excessive Columns for HPT version 4.x"
         lblSoftWarn.Visible = False
@@ -301,7 +301,7 @@ Partial Class frmMain
         Label11.AutoSize = True
         Label11.Location = New Point(248, 29)
         Label11.Name = "Label11"
-        Label11.Size = New Size(259, 25)
+        Label11.Size = New Size(174, 15)
         Label11.TabIndex = 13
         Label11.Text = "(interpolates between columns)"
         ' 
@@ -310,7 +310,7 @@ Partial Class frmMain
         Label10.AutoSize = True
         Label10.Location = New Point(248, 66)
         Label10.Name = "Label10"
-        Label10.Size = New Size(246, 25)
+        Label10.Size = New Size(164, 15)
         Label10.TabIndex = 12
         Label10.Text = "(adds a left and right column)"
         ' 
@@ -319,7 +319,7 @@ Partial Class frmMain
         Label8.AutoSize = True
         Label8.Location = New Point(536, 66)
         Label8.Name = "Label8"
-        Label8.Size = New Size(375, 25)
+        Label8.Size = New Size(253, 15)
         Label8.TabIndex = 11
         Label8.Text = "(use as Column Axis Parameter in the Scanner)"
         ' 
@@ -328,7 +328,7 @@ Partial Class frmMain
         Label5.AutoSize = True
         Label5.Location = New Point(538, 29)
         Label5.Name = "Label5"
-        Label5.Size = New Size(54, 25)
+        Label5.Size = New Size(35, 15)
         Label5.TabIndex = 6
         Label5.Text = "Copy"
         ' 
@@ -339,7 +339,7 @@ Partial Class frmMain
         grdDummy.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = SystemColors.ActiveCaption
-        DataGridViewCellStyle3.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        DataGridViewCellStyle3.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
         DataGridViewCellStyle3.ForeColor = SystemColors.WindowText
         DataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight
         DataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText
@@ -377,7 +377,7 @@ Partial Class frmMain
         lnkCopyDefaultColumnHeaders.AutoSize = True
         lnkCopyDefaultColumnHeaders.Location = New Point(614, 21)
         lnkCopyDefaultColumnHeaders.Name = "lnkCopyDefaultColumnHeaders"
-        lnkCopyDefaultColumnHeaders.Size = New Size(144, 25)
+        lnkCopyDefaultColumnHeaders.Size = New Size(96, 15)
         lnkCopyDefaultColumnHeaders.TabIndex = 10
         lnkCopyDefaultColumnHeaders.TabStop = True
         lnkCopyDefaultColumnHeaders.Text = "Column Headers"
@@ -387,7 +387,7 @@ Partial Class frmMain
         lnkInputColumns.AutoSize = True
         lnkInputColumns.Location = New Point(63, 44)
         lnkInputColumns.Name = "lnkInputColumns"
-        lnkInputColumns.Size = New Size(165, 25)
+        lnkInputColumns.Size = New Size(111, 15)
         lnkInputColumns.TabIndex = 5
         lnkInputColumns.TabStop = True
         lnkInputColumns.Text = "Column Axis Labels"
@@ -397,7 +397,7 @@ Partial Class frmMain
         lnkInputTable.AutoSize = True
         lnkInputTable.Location = New Point(63, 21)
         lnkInputTable.Name = "lnkInputTable"
-        lnkInputTable.Size = New Size(127, 25)
+        lnkInputTable.Size = New Size(85, 15)
         lnkInputTable.TabIndex = 4
         lnkInputTable.TabStop = True
         lnkInputTable.Text = "Table with Axis"
@@ -407,7 +407,7 @@ Partial Class frmMain
         Label9.AutoSize = True
         Label9.Location = New Point(538, 46)
         Label9.Name = "Label9"
-        Label9.Size = New Size(395, 25)
+        Label9.Size = New Size(264, 15)
         Label9.TabIndex = 12
         Label9.Text = "(just in case you lost the originals in the Scanner)"
         ' 
@@ -416,7 +416,7 @@ Partial Class frmMain
         Label2.AutoSize = True
         Label2.Location = New Point(538, 21)
         Label2.Name = "Label2"
-        Label2.Size = New Size(54, 25)
+        Label2.Size = New Size(35, 15)
         Label2.TabIndex = 11
         Label2.Text = "Copy"
         ' 
@@ -426,7 +426,7 @@ Partial Class frmMain
         MenuStrip1.Items.AddRange(New ToolStripItem() {mnuFile, mnuHelp})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.Size = New Size(984, 33)
+        MenuStrip1.Size = New Size(984, 24)
         MenuStrip1.TabIndex = 4
         MenuStrip1.Text = "MenuStrip1"
         ' 
@@ -434,66 +434,66 @@ Partial Class frmMain
         ' 
         mnuFile.DropDownItems.AddRange(New ToolStripItem() {mnuFileExit})
         mnuFile.Name = "mnuFile"
-        mnuFile.Size = New Size(54, 29)
+        mnuFile.Size = New Size(37, 20)
         mnuFile.Text = "File"
         ' 
         ' mnuFileExit
         ' 
         mnuFileExit.Name = "mnuFileExit"
-        mnuFileExit.Size = New Size(141, 34)
+        mnuFileExit.Size = New Size(93, 22)
         mnuFileExit.Text = "Exit"
         ' 
         ' mnuHelp
         ' 
         mnuHelp.DropDownItems.AddRange(New ToolStripItem() {mnuHelpSupportBuyMeACoffee, mnuHelpSupportSendMeAPM, ToolStripMenuItem1, mnuHelpHowToYoutubeVideoDemo, mnuHelpUseDynamicAir, mnuHelpManuallyCheckForNewerVersion, mnuHelpAbout})
         mnuHelp.Name = "mnuHelp"
-        mnuHelp.Size = New Size(65, 29)
+        mnuHelp.Size = New Size(44, 20)
         mnuHelp.Text = "Help"
         ' 
         ' mnuHelpSupportBuyMeACoffee
         ' 
         mnuHelpSupportBuyMeACoffee.Name = "mnuHelpSupportBuyMeACoffee"
-        mnuHelpSupportBuyMeACoffee.Size = New Size(494, 34)
+        mnuHelpSupportBuyMeACoffee.Size = New Size(327, 22)
         mnuHelpSupportBuyMeACoffee.Text = "Support: Buy Me a Coffee"
         ' 
         ' mnuHelpSupportSendMeAPM
         ' 
         mnuHelpSupportSendMeAPM.Name = "mnuHelpSupportSendMeAPM"
-        mnuHelpSupportSendMeAPM.Size = New Size(494, 34)
+        mnuHelpSupportSendMeAPM.Size = New Size(327, 22)
         mnuHelpSupportSendMeAPM.Text = "Support: Send Me a PM"
         ' 
         ' ToolStripMenuItem1
         ' 
         ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        ToolStripMenuItem1.Size = New Size(491, 6)
+        ToolStripMenuItem1.Size = New Size(324, 6)
         ' 
         ' mnuHelpHowToYoutubeVideoDemo
         ' 
         mnuHelpHowToYoutubeVideoDemo.Name = "mnuHelpHowToYoutubeVideoDemo"
-        mnuHelpHowToYoutubeVideoDemo.Size = New Size(494, 34)
+        mnuHelpHowToYoutubeVideoDemo.Size = New Size(327, 22)
         mnuHelpHowToYoutubeVideoDemo.Text = "How To: Youtube Video Demo"
         ' 
         ' mnuHelpUseDynamicAir
         ' 
         mnuHelpUseDynamicAir.Name = "mnuHelpUseDynamicAir"
-        mnuHelpUseDynamicAir.Size = New Size(494, 34)
+        mnuHelpUseDynamicAir.Size = New Size(327, 22)
         mnuHelpUseDynamicAir.Text = "First, join the 21st Centurty and use Dynamic Air"
         ' 
         ' mnuHelpManuallyCheckForNewerVersion
         ' 
         mnuHelpManuallyCheckForNewerVersion.Name = "mnuHelpManuallyCheckForNewerVersion"
-        mnuHelpManuallyCheckForNewerVersion.Size = New Size(494, 34)
+        mnuHelpManuallyCheckForNewerVersion.Size = New Size(327, 22)
         mnuHelpManuallyCheckForNewerVersion.Text = "Manually Check for Newer Version"
         ' 
         ' mnuHelpAbout
         ' 
         mnuHelpAbout.Name = "mnuHelpAbout"
-        mnuHelpAbout.Size = New Size(494, 34)
+        mnuHelpAbout.Size = New Size(327, 22)
         mnuHelpAbout.Text = "About"
         ' 
         ' frmMain
         ' 
-        AutoScaleDimensions = New SizeF(10F, 25F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(984, 601)
         Controls.Add(grpDummy)
@@ -504,7 +504,7 @@ Partial Class frmMain
         Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "frmMain"
-        Text = "MAF Analyzer     [INTERNAL DEVELOPER RELEASE]     [ALPHA RELEASE 3]"
+        Text = "MAF Analyzer     [INTERNAL DEVELOPER RELEASE]     [ALPHA RELEASE 4]"
         grpFinal.ResumeLayout(False)
         grpFinal.PerformLayout()
         CType(grdFinal, ComponentModel.ISupportInitialize).EndInit()
