@@ -9,6 +9,11 @@ Public Class frmMain
 
             Me.Cursor = Cursors.WaitCursor
 
+            ' will be used as as visual indicator that the send to clipboard was completed
+            lnkCopyDefaultColumnHeaders.Tag = lblCopiedDefault
+            lnkCopyDummyColumnHeaders.Tag = lblCopiedDummy
+            lnkOutputFinal.Tag = lblCopiedFinal
+
             'double buffer grid for visual appeal
             grdInput.GetType.InvokeMember("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.SetProperty, Nothing, grdInput, New Object() {True})
             grdDummy.GetType.InvokeMember("DoubleBuffered", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance Or System.Reflection.BindingFlags.SetProperty, Nothing, grdDummy, New Object() {True})
@@ -216,7 +221,7 @@ Public Class frmMain
         End Try
     End Sub
 
-    Public Function MAF_ClipboardToDatatable() As DataTable
+    Private Function MAF_ClipboardToDatatable() As DataTable
         ' --------------------------------------------------------------------------------------------
         ' GET DATA FROM CLIPBOARD
         ' --------------------------------------------------------------------------------------------
@@ -275,7 +280,7 @@ Public Class frmMain
         Return dt
     End Function
 
-    Public Shared Sub FindMaxDataTableValue(ByVal objDT As DataTable, ByRef intMax As Integer, ByRef intMin As Integer)
+    Private Sub FindMaxDataTableValue(ByVal objDT As DataTable, ByRef intMax As Integer, ByRef intMin As Integer)
         ' iterate through every cell to determine the absolute min and max values
         ' we will need this information to apply the heatmap backcolors
 
@@ -313,7 +318,7 @@ Public Class frmMain
         Next
     End Sub
 
-    Public Shared Sub DatatableToClipboard(ByVal grd As DataGridView, ByVal IncludeHeaders As Boolean)
+    Private Sub DatatableToClipboard(ByVal grd As DataGridView, ByVal IncludeHeaders As Boolean)
         If grd.GetClipboardContent IsNot Nothing Then
 
             If IncludeHeaders Then
@@ -323,6 +328,14 @@ Public Class frmMain
             End If
 
             Clipboard.SetDataObject(grd.GetClipboardContent)
+
+            tmrCopied.Tag = lnkOutputFinal.Tag
+            If tmrCopied.Tag IsNot Nothing Then
+                If TypeOf tmrCopied.Tag Is Label Then
+                    DirectCast(tmrCopied.Tag, Label).Visible = True
+                End If
+            End If
+            tmrCopied.Enabled = True
         End If
     End Sub
 
@@ -397,6 +410,15 @@ Public Class frmMain
             COL_LIST = COL_LIST.Trim
 
             Clipboard.SetText(COL_LIST)
+
+            tmrCopied.Tag = lnkCopyDefaultColumnHeaders.Tag
+            If tmrCopied.Tag IsNot Nothing Then
+                If TypeOf tmrCopied.Tag Is Label Then
+                    DirectCast(tmrCopied.Tag, Label).Visible = True
+                End If
+            End If
+            tmrCopied.Enabled = True
+
 
         Catch ex As Exception
             MsgBox("lnkCopyDummyColumnHeaders_LinkClicked(): " & ex.Message, MsgBoxStyle.Critical)
@@ -727,6 +749,14 @@ Public Class frmMain
         ' ---------------------------------------------------------------------------------
         If SEND_TO_CLIPBOARD Then
             Clipboard.SetText(COL_LIST)
+
+            tmrCopied.Tag = lnkCopyDummyColumnHeaders.Tag
+            If tmrCopied.Tag IsNot Nothing Then
+                If TypeOf tmrCopied.Tag Is Label Then
+                    DirectCast(tmrCopied.Tag, Label).Visible = True
+                End If
+            End If
+            tmrCopied.Enabled = True
         End If
         ' ---------------------------------------------------------------------------------
 
@@ -787,6 +817,10 @@ Public Class frmMain
             For i As Integer = DT_FINAL.Columns.Count - 1 To 0 Step -1
                 'COL_NAME = DT_FINAL.Columns(i).ColumnName
                 'INDX = DT_ORIG.Columns.IndexOf(DT_FINAL.Columns(i).ColumnName)
+
+                'If COL_NAME = "7650" Then
+                '    MsgBox("attention")
+                'End If
 
                 If DT_ORIG.Columns.IndexOf(DT_FINAL.Columns(i).ColumnName) = -1 Then
                     DT_FINAL.Columns.RemoveAt(i)
@@ -959,4 +993,75 @@ Public Class frmMain
     End Sub
 
 
+
+    Private Sub grd_MouseClick(sender As Object, e As MouseEventArgs) Handles grdInput.MouseClick,
+                                                                              grdDummy.MouseClick,
+                                                                              grdFinal.MouseClick
+        Try
+            Dim grd As DataGridView = DirectCast(sender, DataGridView)
+            grd.Tag = Nothing
+
+            Dim hit As DataGridView.HitTestInfo = grd.HitTest(e.Location.X, e.Location.Y)
+            If hit.ColumnIndex = -1 Then
+                Exit Sub
+            End If
+
+            If e.Button = MouseButtons.Right Then
+                grd.Tag = grd.Columns(hit.ColumnIndex).Name
+                ctxGenerateFocusList.Text = "Generate Focus List for: " & grd.Columns(hit.ColumnIndex).Name
+
+                If grd.Rows.Count > 0 Then
+                    grd.CurrentCell = grd(hit.ColumnIndex, 0)
+                End If
+
+                ctxDrillDown.Show(New System.Drawing.Point(MousePosition))
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Private Sub ctxGenerateFocusList_Click(sender As Object, e As EventArgs) Handles ctxGenerateFocusList.Click
+        Try
+            If grdDummy.Tag = Nothing Then
+                Exit Sub
+            End If
+
+            If Not IsNumeric(grdDummy.Tag) Then
+                Exit Sub
+            End If
+
+
+            Dim MIN As Integer = -25
+            Dim MAX As Integer = 25
+            Dim INTERVAL As Integer = 1
+            Dim LIST As String = ""
+            Dim CURRENT As Integer = CInt(grdDummy.Tag)
+
+            For i As Integer = MIN To MAX
+                LIST += CURRENT + i & " "
+            Next
+            LIST = LIST.Trim
+
+            Clipboard.SetText(LIST)
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Private Sub tmrCopied_Tick(sender As Object, e As EventArgs) Handles tmrCopied.Tick
+        Try
+            tmrCopied.Enabled = False
+            If tmrCopied.Tag IsNot Nothing Then
+                If TypeOf tmrCopied.Tag Is Label Then
+                    DirectCast(tmrCopied.Tag, Label).Visible = False
+                End If
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
 End Class

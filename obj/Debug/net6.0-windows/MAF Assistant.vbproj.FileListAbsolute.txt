@@ -5,7 +5,6 @@ C:\Users\danku\source\repos\MAF Assistant\bin\Debug\net6.0-windows\MAF Assistant
 C:\Users\danku\source\repos\MAF Assistant\bin\Debug\net6.0-windows\MAF Assistant.dll
 C:\Users\danku\source\repos\MAF Assistant\bin\Debug\net6.0-windows\MAF Assistant.pdb
 C:\Users\danku\source\repos\MAF Assistant\obj\Debug\net6.0-windows\MAF Assistant.vbproj.AssemblyReference.cache
-C:\Users\danku\source\repos\MAF Assistant\obj\Debug\net6.0-windows\MAF_Assistant.Form1.resources
 C:\Users\danku\source\repos\MAF Assistant\obj\Debug\net6.0-windows\MAF_Assistant.frmMain.resources
 C:\Users\danku\source\repos\MAF Assistant\obj\Debug\net6.0-windows\MAF Assistant.vbproj.GenerateResource.cache
 C:\Users\danku\source\repos\MAF Assistant\obj\Debug\net6.0-windows\MAF Assistant.GeneratedMSBuildEditorConfig.editorconfig

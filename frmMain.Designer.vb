@@ -22,12 +22,14 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim resources As ComponentModel.ComponentResourceManager = New ComponentModel.ComponentResourceManager(GetType(frmMain))
         Label1 = New Label()
         grpFinal = New GroupBox()
+        lblCopiedFinal = New Label()
         lnkOutputFinal = New LinkLabel()
         lnkInputExpanded = New LinkLabel()
         Label7 = New Label()
@@ -37,6 +39,7 @@ Partial Class frmMain
         grdFinal = New DataGridView()
         grdInput = New DataGridView()
         grpDummy = New GroupBox()
+        lblCopiedDummy = New Label()
         cmbHPTVersion = New ComboBox()
         lnkCopyDummyColumnHeaders = New LinkLabel()
         spinHzRange = New NumericUpDown()
@@ -50,6 +53,7 @@ Partial Class frmMain
         Label5 = New Label()
         grdDummy = New DataGridView()
         grpInput = New GroupBox()
+        lblCopiedDefault = New Label()
         lnkCopyDefaultColumnHeaders = New LinkLabel()
         lnkInputColumns = New LinkLabel()
         lnkInputTable = New LinkLabel()
@@ -66,6 +70,9 @@ Partial Class frmMain
         mnuHelpUseDynamicAir = New ToolStripMenuItem()
         mnuHelpManuallyCheckForNewerVersion = New ToolStripMenuItem()
         mnuHelpAbout = New ToolStripMenuItem()
+        ctxDrillDown = New ContextMenuStrip(components)
+        ctxGenerateFocusList = New ToolStripMenuItem()
+        tmrCopied = New Timer(components)
         grpFinal.SuspendLayout()
         CType(grdFinal, ComponentModel.ISupportInitialize).BeginInit()
         CType(grdInput, ComponentModel.ISupportInitialize).BeginInit()
@@ -75,6 +82,7 @@ Partial Class frmMain
         CType(grdDummy, ComponentModel.ISupportInitialize).BeginInit()
         grpInput.SuspendLayout()
         MenuStrip1.SuspendLayout()
+        ctxDrillDown.SuspendLayout()
         SuspendLayout()
         ' 
         ' Label1
@@ -88,6 +96,7 @@ Partial Class frmMain
         ' 
         ' grpFinal
         ' 
+        grpFinal.Controls.Add(lblCopiedFinal)
         grpFinal.Controls.Add(lnkOutputFinal)
         grpFinal.Controls.Add(lnkInputExpanded)
         grpFinal.Controls.Add(Label7)
@@ -101,6 +110,18 @@ Partial Class frmMain
         grpFinal.TabIndex = 2
         grpFinal.TabStop = False
         grpFinal.Text = "Remove Dummy Columns"
+        ' 
+        ' lblCopiedFinal
+        ' 
+        lblCopiedFinal.AutoSize = True
+        lblCopiedFinal.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        lblCopiedFinal.ForeColor = Color.Green
+        lblCopiedFinal.Location = New Point(754, 24)
+        lblCopiedFinal.Name = "lblCopiedFinal"
+        lblCopiedFinal.Size = New Size(114, 15)
+        lblCopiedFinal.TabIndex = 18
+        lblCopiedFinal.Text = "Copied to clipboard"
+        lblCopiedFinal.Visible = False
         ' 
         ' lnkOutputFinal
         ' 
@@ -178,6 +199,7 @@ Partial Class frmMain
         grdFinal.RowHeadersVisible = False
         grdFinal.RowHeadersWidth = 62
         grdFinal.RowTemplate.Height = 25
+        grdFinal.SelectionMode = DataGridViewSelectionMode.CellSelect
         grdFinal.Size = New Size(968, 88)
         grdFinal.TabIndex = 2
         ' 
@@ -202,11 +224,13 @@ Partial Class frmMain
         grdInput.RowHeadersVisible = False
         grdInput.RowHeadersWidth = 62
         grdInput.RowTemplate.Height = 25
+        grdInput.SelectionMode = DataGridViewSelectionMode.CellSelect
         grdInput.Size = New Size(968, 88)
         grdInput.TabIndex = 0
         ' 
         ' grpDummy
         ' 
+        grpDummy.Controls.Add(lblCopiedDummy)
         grpDummy.Controls.Add(cmbHPTVersion)
         grpDummy.Controls.Add(lnkCopyDummyColumnHeaders)
         grpDummy.Controls.Add(spinHzRange)
@@ -225,6 +249,18 @@ Partial Class frmMain
         grpDummy.TabIndex = 3
         grpDummy.TabStop = False
         grpDummy.Text = "Add Dummy Columns"
+        ' 
+        ' lblCopiedDummy
+        ' 
+        lblCopiedDummy.AutoSize = True
+        lblCopiedDummy.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        lblCopiedDummy.ForeColor = Color.Green
+        lblCopiedDummy.Location = New Point(754, 29)
+        lblCopiedDummy.Name = "lblCopiedDummy"
+        lblCopiedDummy.Size = New Size(114, 15)
+        lblCopiedDummy.TabIndex = 16
+        lblCopiedDummy.Text = "Copied to clipboard"
+        lblCopiedDummy.Visible = False
         ' 
         ' cmbHPTVersion
         ' 
@@ -353,11 +389,13 @@ Partial Class frmMain
         grdDummy.RowHeadersVisible = False
         grdDummy.RowHeadersWidth = 62
         grdDummy.RowTemplate.Height = 25
+        grdDummy.SelectionMode = DataGridViewSelectionMode.CellSelect
         grdDummy.Size = New Size(968, 88)
         grdDummy.TabIndex = 1
         ' 
         ' grpInput
         ' 
+        grpInput.Controls.Add(lblCopiedDefault)
         grpInput.Controls.Add(lnkCopyDefaultColumnHeaders)
         grpInput.Controls.Add(lnkInputColumns)
         grpInput.Controls.Add(lnkInputTable)
@@ -371,6 +409,18 @@ Partial Class frmMain
         grpInput.TabIndex = 3
         grpInput.TabStop = False
         grpInput.Text = "Default MAF Columns"
+        ' 
+        ' lblCopiedDefault
+        ' 
+        lblCopiedDefault.AutoSize = True
+        lblCopiedDefault.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        lblCopiedDefault.ForeColor = Color.Green
+        lblCopiedDefault.Location = New Point(754, 21)
+        lblCopiedDefault.Name = "lblCopiedDefault"
+        lblCopiedDefault.Size = New Size(114, 15)
+        lblCopiedDefault.TabIndex = 17
+        lblCopiedDefault.Text = "Copied to clipboard"
+        lblCopiedDefault.Visible = False
         ' 
         ' lnkCopyDefaultColumnHeaders
         ' 
@@ -491,6 +541,22 @@ Partial Class frmMain
         mnuHelpAbout.Size = New Size(327, 22)
         mnuHelpAbout.Text = "About"
         ' 
+        ' ctxDrillDown
+        ' 
+        ctxDrillDown.Items.AddRange(New ToolStripItem() {ctxGenerateFocusList})
+        ctxDrillDown.Name = "ctxDrillDown"
+        ctxDrillDown.Size = New Size(177, 26)
+        ' 
+        ' ctxGenerateFocusList
+        ' 
+        ctxGenerateFocusList.Name = "ctxGenerateFocusList"
+        ctxGenerateFocusList.Size = New Size(176, 22)
+        ctxGenerateFocusList.Text = "Generate Focus List"
+        ' 
+        ' tmrCopied
+        ' 
+        tmrCopied.Interval = 500
+        ' 
         ' frmMain
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -504,7 +570,7 @@ Partial Class frmMain
         Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "frmMain"
-        Text = "MAF Analyzer     [INTERNAL DEVELOPER RELEASE]     [ALPHA RELEASE 4]"
+        Text = "MAF Analyzer     [INTERNAL DEVELOPER RELEASE]     [ALPHA RELEASE 5]"
         grpFinal.ResumeLayout(False)
         grpFinal.PerformLayout()
         CType(grdFinal, ComponentModel.ISupportInitialize).EndInit()
@@ -518,6 +584,7 @@ Partial Class frmMain
         grpInput.PerformLayout()
         MenuStrip1.ResumeLayout(False)
         MenuStrip1.PerformLayout()
+        ctxDrillDown.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -562,4 +629,10 @@ Partial Class frmMain
     Friend WithEvents mnuHelpManuallyCheckForNewerVersion As ToolStripMenuItem
     Friend WithEvents mnuHelpAbout As ToolStripMenuItem
     Friend WithEvents mnuHelpUseDynamicAir As ToolStripMenuItem
+    Friend WithEvents ctxDrillDown As ContextMenuStrip
+    Friend WithEvents ctxGenerateFocusList As ToolStripMenuItem
+    Friend WithEvents lblCopiedDummy As Label
+    Friend WithEvents tmrCopied As Timer
+    Friend WithEvents lblCopiedFinal As Label
+    Friend WithEvents lblCopiedDefault As Label
 End Class
