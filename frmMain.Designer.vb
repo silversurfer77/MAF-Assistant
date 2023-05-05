@@ -71,7 +71,8 @@ Partial Class frmMain
         mnuHelpManuallyCheckForNewerVersion = New ToolStripMenuItem()
         mnuHelpAbout = New ToolStripMenuItem()
         ctxDrillDown = New ContextMenuStrip(components)
-        ctxGenerateFocusList = New ToolStripMenuItem()
+        ctxGenerateFocusList25 = New ToolStripMenuItem()
+        ctxGenerateFocusList50 = New ToolStripMenuItem()
         tmrCopied = New Timer(components)
         grpFinal.SuspendLayout()
         CType(grdFinal, ComponentModel.ISupportInitialize).BeginInit()
@@ -183,6 +184,7 @@ Partial Class frmMain
         ' 
         grdFinal.AllowUserToAddRows = False
         grdFinal.AllowUserToDeleteRows = False
+        grdFinal.AllowUserToResizeRows = False
         DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = SystemColors.ActiveCaption
         DataGridViewCellStyle1.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
@@ -207,6 +209,7 @@ Partial Class frmMain
         ' 
         grdInput.AllowUserToAddRows = False
         grdInput.AllowUserToDeleteRows = False
+        grdInput.AllowUserToResizeRows = False
         grdInput.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = SystemColors.ActiveCaption
@@ -372,6 +375,7 @@ Partial Class frmMain
         ' 
         grdDummy.AllowUserToAddRows = False
         grdDummy.AllowUserToDeleteRows = False
+        grdDummy.AllowUserToResizeRows = False
         grdDummy.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = SystemColors.ActiveCaption
@@ -543,15 +547,23 @@ Partial Class frmMain
         ' 
         ' ctxDrillDown
         ' 
-        ctxDrillDown.Items.AddRange(New ToolStripItem() {ctxGenerateFocusList})
+        ctxDrillDown.Items.AddRange(New ToolStripItem() {ctxGenerateFocusList25, ctxGenerateFocusList50})
         ctxDrillDown.Name = "ctxDrillDown"
-        ctxDrillDown.Size = New Size(177, 26)
+        ctxDrillDown.Size = New Size(213, 48)
         ' 
-        ' ctxGenerateFocusList
+        ' ctxGenerateFocusList25
         ' 
-        ctxGenerateFocusList.Name = "ctxGenerateFocusList"
-        ctxGenerateFocusList.Size = New Size(176, 22)
-        ctxGenerateFocusList.Text = "Generate Focus List"
+        ctxGenerateFocusList25.Name = "ctxGenerateFocusList25"
+        ctxGenerateFocusList25.Size = New Size(212, 22)
+        ctxGenerateFocusList25.Tag = "25"
+        ctxGenerateFocusList25.Text = "Generate Focus List +/- 25"
+        ' 
+        ' ctxGenerateFocusList50
+        ' 
+        ctxGenerateFocusList50.Name = "ctxGenerateFocusList50"
+        ctxGenerateFocusList50.Size = New Size(212, 22)
+        ctxGenerateFocusList50.Tag = "50"
+        ctxGenerateFocusList50.Text = "Generate Focus List +/- 50"
         ' 
         ' tmrCopied
         ' 
@@ -570,7 +582,7 @@ Partial Class frmMain
         Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "frmMain"
-        Text = "MAF Analyzer     [INTERNAL DEVELOPER RELEASE]     [ALPHA RELEASE 5]"
+        Text = "MAF Analyzer     [INTERNAL DEVELOPER RELEASE]     [ALPHA RELEASE 7]"
         grpFinal.ResumeLayout(False)
         grpFinal.PerformLayout()
         CType(grdFinal, ComponentModel.ISupportInitialize).EndInit()
@@ -630,9 +642,10 @@ Partial Class frmMain
     Friend WithEvents mnuHelpAbout As ToolStripMenuItem
     Friend WithEvents mnuHelpUseDynamicAir As ToolStripMenuItem
     Friend WithEvents ctxDrillDown As ContextMenuStrip
-    Friend WithEvents ctxGenerateFocusList As ToolStripMenuItem
+    Friend WithEvents ctxGenerateFocusList25 As ToolStripMenuItem
     Friend WithEvents lblCopiedDummy As Label
     Friend WithEvents tmrCopied As Timer
     Friend WithEvents lblCopiedFinal As Label
     Friend WithEvents lblCopiedDefault As Label
+    Friend WithEvents ctxGenerateFocusList50 As ToolStripMenuItem
 End Class

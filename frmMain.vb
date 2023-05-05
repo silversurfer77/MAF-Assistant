@@ -999,7 +999,7 @@ Public Class frmMain
                                                                               grdFinal.MouseClick
         Try
             Dim grd As DataGridView = DirectCast(sender, DataGridView)
-            grd.Tag = Nothing
+            ctxDrillDown.Tag = Nothing
 
             Dim hit As DataGridView.HitTestInfo = grd.HitTest(e.Location.X, e.Location.Y)
             If hit.ColumnIndex = -1 Then
@@ -1007,8 +1007,52 @@ Public Class frmMain
             End If
 
             If e.Button = MouseButtons.Right Then
-                grd.Tag = grd.Columns(hit.ColumnIndex).Name
-                ctxGenerateFocusList.Text = "Generate Focus List for: " & grd.Columns(hit.ColumnIndex).Name
+                ctxDrillDown.Tag = grd.Columns(hit.ColumnIndex).Name
+
+                Dim CURRENT As String = grd.Columns(hit.ColumnIndex).Name
+
+                ctxGenerateFocusList25.Text = "Generate Focus List for: " & CURRENT & "Hz +/-" & ctxGenerateFocusList25.Tag.ToString
+                ctxGenerateFocusList50.Text = "Generate Focus List for: " & CURRENT & "Hz +/-" & ctxGenerateFocusList50.Tag.ToString
+
+
+                ' remove any previously add dynamic items
+                If ctxDrillDown.Items.Count > 2 Then
+                    For i As Integer = ctxDrillDown.Items.Count - 1 To 2 Step -1
+                        ctxDrillDown.Items.RemoveAt(i)
+                    Next
+                End If
+
+                ' add dynamic items to the list of options
+                ctxDrillDown.Items.AddRange({New ToolStripSeparator()})
+                Dim PREV_COL As String = ""
+                Dim NEXT_COL As String = ""
+                Dim INDX As Integer = ctxDrillDown.Items.Count - 1
+
+                If hit.ColumnIndex > 0 Then
+                    PREV_COL = grd.Columns(hit.ColumnIndex - 1).Name
+                    ctxDrillDown.Items.Add("Generate Focus List for " & PREV_COL & " - " & CURRENT & " Hz")
+
+                    INDX += 1
+                    AddHandler ctxDrillDown.Items(INDX).Click, AddressOf GenerateFocusListLarge
+                    ctxDrillDown.Items(INDX).Tag = PREV_COL & "|" & CURRENT
+                End If
+
+                If hit.ColumnIndex < grd.ColumnCount - 1 Then
+                    NEXT_COL = grd.Columns(hit.ColumnIndex + 1).Name
+                    ctxDrillDown.Items.Add("Generate Focus List for " & CURRENT & " - " & NEXT_COL & " Hz")
+
+                    INDX += 1
+                    AddHandler ctxDrillDown.Items(INDX).Click, AddressOf GenerateFocusListLarge
+                    ctxDrillDown.Items(INDX).Tag = CURRENT & "|" & NEXT_COL
+                End If
+
+                If hit.ColumnIndex > 0 And hit.ColumnIndex < grd.ColumnCount - 1 Then
+                    ctxDrillDown.Items.Add("Generate Focus List for " & PREV_COL & " - " & NEXT_COL & " Hz")
+
+                    INDX += 1
+                    AddHandler ctxDrillDown.Items(INDX).Click, AddressOf GenerateFocusListLarge
+                    ctxDrillDown.Items(INDX).Tag = PREV_COL & "|" & NEXT_COL
+                End If
 
                 If grd.Rows.Count > 0 Then
                     grd.CurrentCell = grd(hit.ColumnIndex, 0)
@@ -1022,30 +1066,9 @@ Public Class frmMain
         End Try
     End Sub
 
-    Private Sub ctxGenerateFocusList_Click(sender As Object, e As EventArgs) Handles ctxGenerateFocusList.Click
+    Private Sub ctxGenerateFocusList_Click(sender As Object, e As EventArgs) Handles ctxGenerateFocusList25.Click, ctxGenerateFocusList50.Click
         Try
-            If grdDummy.Tag = Nothing Then
-                Exit Sub
-            End If
-
-            If Not IsNumeric(grdDummy.Tag) Then
-                Exit Sub
-            End If
-
-
-            Dim MIN As Integer = -25
-            Dim MAX As Integer = 25
-            Dim INTERVAL As Integer = 1
-            Dim LIST As String = ""
-            Dim CURRENT As Integer = CInt(grdDummy.Tag)
-
-            For i As Integer = MIN To MAX
-                LIST += CURRENT + i & " "
-            Next
-            LIST = LIST.Trim
-
-            Clipboard.SetText(LIST)
-
+            GenerateFocusList(ctxDrillDown.Tag, DirectCast(sender, ToolStripMenuItem).Tag)
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
@@ -1064,4 +1087,115 @@ Public Class frmMain
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
+
+
+
+
+
+    'Private Sub Focus_Prev_Current()
+    '    Dim HZ() As Object = ctxDrillDown.Tag.split("|")
+    '    If HZ Is Nothing Then
+    '        Exit Sub
+    '    End If
+    '    If HZ.Length = 2 Then
+    '        GenerateLargerFocusList(HZ(0), HZ(1))
+    '    End If
+    'End Sub
+
+    'Private Sub Focus_Current_Next()
+    '    MsgBox("2")
+    'End Sub
+
+    'Private Sub Focus_Prev_Current_Next()
+    '    MsgBox("3")
+    'End Sub
+
+
+    Private Sub GenerateFocusList(ByVal FOCUS_HZ As Object, ByVal RANGE As Object)
+        Clipboard.Clear()
+        If FOCUS_HZ = Nothing Then
+            Exit Sub
+        End If
+        If Not IsNumeric(FOCUS_HZ) Then
+            Exit Sub
+        End If
+        If RANGE = Nothing Then
+            Exit Sub
+        End If
+        If Not IsNumeric(RANGE) Then
+            Exit Sub
+        End If
+
+        FOCUS_HZ = Math.Abs(CInt(FOCUS_HZ))
+        RANGE = Math.Abs(CInt(RANGE))
+
+        Dim MIN As Integer = RANGE * -1
+        Dim MAX As Integer = RANGE
+        Dim INTERVAL As Integer = 1
+        Dim LIST As String = ""
+        Dim CURRENT As Integer = CInt(FOCUS_HZ)
+
+        For i As Integer = MIN To MAX
+            LIST += CURRENT + i & " "
+        Next
+        LIST = LIST.Trim
+
+        Clipboard.SetText(LIST)
+    End Sub
+
+    Private Sub GenerateFocusListLarge(sender As Object, e As EventArgs)
+        Clipboard.Clear()
+
+
+
+
+        'Dim HZ() As Object = ctxDrillDown.Tag.split("|")
+        Dim HZ() As Object = DirectCast(sender, ToolStripMenuItem).Tag.split("|")
+        If HZ Is Nothing Then
+            Exit Sub
+        End If
+
+        Dim MIN_HZ As Object
+        Dim MAX_HZ As Object
+
+        If HZ.Length = 2 Then
+            MIN_HZ = HZ(0)
+            MAX_HZ = HZ(1)
+        Else
+            Exit Sub
+        End If
+
+
+        If MIN_HZ = Nothing Then
+            Exit Sub
+        End If
+        If Not IsNumeric(MIN_HZ) Then
+            Exit Sub
+        End If
+        If MAX_HZ = Nothing Then
+            Exit Sub
+        End If
+        If Not IsNumeric(MAX_HZ) Then
+            Exit Sub
+        End If
+
+        If MIN_HZ > MAX_HZ Then
+            Dim TMP_HZ As Object = MIN_HZ
+            MIN_HZ = MAX_HZ
+            MAX_HZ = TMP_HZ
+        End If
+
+        Dim LIST As String = ""
+        'Dim CURRENT As Integer = CInt(MIN_HZ)
+
+        For i As Integer = 0 To MAX_HZ - MIN_HZ
+            'LIST += CURRENT + i & " "
+            LIST += MIN_HZ + i & " "
+        Next
+        LIST = LIST.Trim
+
+        Clipboard.SetText(LIST)
+
+    End Sub
+
 End Class
