@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MAF Assistant", "MAF Assistant.vbproj", "{E7669AEE-4025-4DD4-AE2D-D1434876D89A}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "MAF Assistant", "MAF Assistant.vbproj", "{E7669AEE-4025-4DD4-AE2D-D1434876D89A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
