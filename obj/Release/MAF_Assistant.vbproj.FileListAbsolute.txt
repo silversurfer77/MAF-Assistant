@@ -1,0 +1,13 @@
+C:\Users\danku\source\repos\MAF_Assistant\bin\Release\MAF_Assistant.exe.config
+C:\Users\danku\source\repos\MAF_Assistant\bin\Release\MAF_Assistant.exe
+C:\Users\danku\source\repos\MAF_Assistant\bin\Release\MAF_Assistant.pdb
+C:\Users\danku\source\repos\MAF_Assistant\bin\Release\MAF_Assistant.xml
+C:\Users\danku\source\repos\MAF_Assistant\obj\Release\MAF_Assistant.vbproj.AssemblyReference.cache
+C:\Users\danku\source\repos\MAF_Assistant\obj\Release\MAF_Assistant.frmMain.resources
+C:\Users\danku\source\repos\MAF_Assistant\obj\Release\MAF_Assistant.Resources.resources
+C:\Users\danku\source\repos\MAF_Assistant\obj\Release\MAF_Assistant.vbproj.GenerateResource.cache
+C:\Users\danku\source\repos\MAF_Assistant\obj\Release\MAF_Assistant.vbproj.CoreCompileInputs.cache
+C:\Users\danku\source\repos\MAF_Assistant\obj\Release\MAF_Assistant.exe
+C:\Users\danku\source\repos\MAF_Assistant\obj\Release\MAF_Assistant.xml
+C:\Users\danku\source\repos\MAF_Assistant\obj\Release\MAF_Assistant.pdb
+C:\Users\danku\source\repos\MAF_Assistant\obj\Release\MAF_Assistant.frmPayPal.resources

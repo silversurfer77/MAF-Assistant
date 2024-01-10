@@ -1,4 +1,6 @@
 ﻿
+Imports System.Runtime.CompilerServices.RuntimeHelpers
+
 Public Class frmMain
 
     Dim FORM_LOADING As Boolean = True
@@ -69,6 +71,16 @@ Public Class frmMain
         End Try
     End Sub
 
+    Private Sub mnuFileClearStartOver_Click(sender As Object, e As EventArgs) Handles mnuFileClearStartOver.Click
+        Try
+            grdInput.DataSource = Nothing
+            grdDummy.DataSource = Nothing
+            grdFinal.DataSource = Nothing
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
     Private Sub mnuFileExit_Click(sender As Object, e As EventArgs) Handles mnuFileExit.Click
         Try
             Me.Close()
@@ -79,7 +91,9 @@ Public Class frmMain
 
     Private Sub mnuHelpSupportBuyMeACoffee_Click(sender As Object, e As EventArgs) Handles mnuHelpSupportBuyMeACoffee.Click
         Try
-            MsgBox("Paypal: dankunkel@gmail.com", MsgBoxStyle.Information, "Stay Golden Pony Boy")
+            'MsgBox("Paypal: dankunkel@gmail.com", MsgBoxStyle.Information, "Stay Golden Pony Boy")
+            Dim objFrm As New frmPayPal
+            objFrm.ShowDialog(Me)
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
@@ -143,9 +157,9 @@ Public Class frmMain
 
     Private Sub mnuHelpAbout_Click(sender As Object, e As EventArgs) Handles mnuHelpAbout.Click
         Try
-            MsgBox("This is a pre-release version held together with duct tape and bailing wire. Good luck.",
+            MsgBox("MAF Assistant v1.0.",
                    MsgBoxStyle.Information,
-                   "Danger to the Manifold")
+                   "dankunkel@gmail.com")
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical)
         End Try
@@ -593,8 +607,12 @@ Public Class frmMain
                     ' ------------------------------------------------
                     For j As Integer = 1 To DUMMY_COLUMNS - 1
                         DUMMY_HZ = CURRENT_HZ + (j * INTERVAL_HZ)
-                        COL = New DataColumn(DUMMY_HZ.ToString, GetType(Object))
-                        DT_NEW.Columns.Add(COL)
+
+                        If DT_NEW.Columns.IndexOf(DUMMY_HZ.ToString) < 0 Then
+                            COL = New DataColumn(DUMMY_HZ.ToString, GetType(Object))
+                            DT_NEW.Columns.Add(COL)
+                        End If
+
                     Next
                     ' ------------------------------------------------
 
@@ -612,7 +630,9 @@ Public Class frmMain
                     ' ADD A COLUMN TO THE LEFT OF THE DEFAULT COLUMN
                     ' ------------------------------------------------
                     If i > 0 Then
-                        DT_NEW.Columns.Add(New DataColumn(CInt(COL.ColumnName) - RANGE, GetType(Object)))
+                        If DT_NEW.Columns.IndexOf(CStr(CInt(COL.ColumnName) - RANGE)) < 0 Then
+                            DT_NEW.Columns.Add(New DataColumn(CInt(COL.ColumnName) - RANGE, GetType(Object)))
+                        End If
                     End If
                     ' ------------------------------------------------
 
@@ -620,7 +640,9 @@ Public Class frmMain
                     ' ------------------------------------------------
                     ' ADD THE MIDDLE (DEFAULT) COLUMN
                     ' ------------------------------------------------
-                    DT_NEW.Columns.Add(COL)
+                    If DT_NEW.Columns.IndexOf(COL.ColumnName) < 0 Then
+                        DT_NEW.Columns.Add(COL)
+                    End If
                     ' ------------------------------------------------
 
 
@@ -628,9 +650,10 @@ Public Class frmMain
                     ' ADD A COLUMN TO THE RIGHT OF THE DEFAULT COLUMN
                     ' ------------------------------------------------
                     If i < DT_OLD.Columns.Count - 1 Then
-                        DT_NEW.Columns.Add(New DataColumn(CInt(COL.ColumnName) + RANGE, GetType(Object)))
+                        If DT_NEW.Columns.IndexOf(CStr(CInt(COL.ColumnName) + RANGE)) < 0 Then
+                            DT_NEW.Columns.Add(New DataColumn(CInt(COL.ColumnName) + RANGE, GetType(Object)))
+                        End If
                     End If
-
                 End If
             Next
 
@@ -998,7 +1021,11 @@ Public Class frmMain
                                                                               grdDummy.MouseClick,
                                                                               grdFinal.MouseClick
         Try
+
+
             Dim grd As DataGridView = DirectCast(sender, DataGridView)
+            ctxCopyColumnHeaders.Tag = grd
+
             ctxDrillDown.Tag = Nothing
 
             Dim hit As DataGridView.HitTestInfo = grd.HitTest(e.Location.X, e.Location.Y)
@@ -1016,8 +1043,8 @@ Public Class frmMain
 
 
                 ' remove any previously add dynamic items
-                If ctxDrillDown.Items.Count > 2 Then
-                    For i As Integer = ctxDrillDown.Items.Count - 1 To 2 Step -1
+                If ctxDrillDown.Items.Count > 4 Then
+                    For i As Integer = ctxDrillDown.Items.Count - 1 To 4 Step -1
                         ctxDrillDown.Items.RemoveAt(i)
                     Next
                 End If
@@ -1198,4 +1225,22 @@ Public Class frmMain
 
     End Sub
 
+    Private Sub ctxCopyColumnHeaders_Click(sender As Object, e As EventArgs) Handles ctxCopyColumnHeaders.Click
+        Try
+            If ctxCopyColumnHeaders.Tag Is Nothing Then
+                Exit Sub
+            End If
+
+            Dim DT As DataTable = DirectCast(DirectCast(ctxCopyColumnHeaders.Tag, DataGridView).DataSource, DataTable)
+            Dim headers As String = ""
+            For Each col As DataColumn In DT.Columns
+                headers += col.ColumnName + " "
+            Next
+
+            Clipboard.SetText(headers.Trim)
+
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
 End Class
